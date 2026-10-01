@@ -1,0 +1,6 @@
+case\tspecies\tpeptide\texpected_exact_loci\texpected_proteins\tnote
+unique\thuman-fixture\tDVFQELIAPK\t1\t1\tSingle locus in H1
+multiple-proteins\thuman-fixture\tPEPTIDER\t2\t2\tExact sequence in H4 and H5
+one-residue-paralog\thuman-fixture\tACDEFGHIK\t1\t1\tNearest alternative ACDEYGHIK differs at position 5
+absent\tmouse-fixture\tDVFQELIAPK\t0\t0\tMouse fixture has V instead of I at one position
+repeated-locus\thuman-fixture\tAAAAK\t2\t1\tTwo loci within H6
