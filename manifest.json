@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "generated": false,
+  "build_date": null,
+  "uniprot_release": null,
+  "datasets": [],
+  "message": "Proteome bundles have not yet been built. Run scripts/build_proteomes.py or the GitHub Pages workflow."
+}
