@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Peptide Proteome Uniqueness & Homology</title>
+  <meta name="description" content="Static browser application for exact proteome uniqueness and local peptide off-target homology screening.">
+  <link rel="stylesheet" href="./css/app.css">
+</head>
+<body>
+  <header class="site-header">
+    <div>
+      <div class="eyebrow">PEPTIDE TARGET SCREENING</div>
+      <h1>Proteome Uniqueness & Homology</h1>
+      <p class="lede">Exact proteomic locus mapping and same-length local off-target similarity for prioritising peptide-specific binder targets.</p>
+    </div>
+    <a class="method-link" href="./docs/METHODOLOGY.md" target="_blank" rel="noreferrer">Scientific methodology</a>
+  </header>
+
+  <main>
+    <section class="card input-card">
+      <div class="section-head">
+        <div><h2>1. Peptides</h2><p>One peptide per line; bare sequences, ID + sequence, or an Excel <code>Stripped.Sequence</code> column.</p></div>
+        <button id="exampleBtn" class="secondary">Load example</button>
+      </div>
+      <textarea id="peptideInput" spellcheck="false" placeholder="DVFQELIAPK&#10;pep_002&#9;GILFVGSGVSGK&#10;pep_003,ACDEFGHIK"></textarea>
+      <div id="parseSummary" class="microcopy">No peptides parsed.</div>
+    </section>
+
+    <section class="card controls-card">
+      <h2>2. Analysis universe</h2>
+      <div class="control-grid">
+        <label>Species
+          <select id="speciesSelect"></select>
+        </label>
+        <label>Proteome universe
+          <select id="universeSelect">
+            <option value="canonical">Canonical/reference proteins only</option>
+            <option value="extended">Canonical + reviewed UniProt isoforms</option>
+          </select>
+        </label>
+        <label class="toggle-row"><input id="advancedToggle" type="checkbox"> <span><strong>Advanced homology</strong><small>BLOSUM62 biochemical similarity</small></span></label>
+        <label>Contact positions <span class="hint">optional; 1-based</span>
+          <input id="contactPositions" placeholder="e.g. 2,5-7">
+        </label>
+        <label>Contact weight multiplier
+          <input id="contactMultiplier" type="number" min="1" step="0.25" value="2">
+        </label>
+      </div>
+      <div id="datasetInfo" class="dataset-info"></div>
+      <div class="warning-box"><strong>Interpretation:</strong> sequence uniqueness does not establish molecular binder specificity. Non-identical peptides can cross-react, especially when substitutions lie outside the structural binding hotspot. Use these results for engineering prioritisation followed by structural design and experimental specificity testing.</div>
+      <div class="actions"><button id="analyzeBtn" class="primary">Analyse peptides</button><button id="cancelBtn" class="secondary" disabled>Reset worker</button></div>
+      <div id="progressWrap" class="progress-wrap hidden"><div class="progress-track"><div id="progressBar"></div></div><div id="progressText">Preparing…</div></div>
+    </section>
+
+    <section class="card results-card">
+      <div class="section-head result-head">
+        <div><h2>3. Results</h2><p id="resultSummary">No analysis run.</p></div>
+        <div class="result-actions">
+          <input id="filterInput" aria-label="Filter results" placeholder="Filter table…">
+          <button id="copyBtn" class="secondary" disabled>Copy table</button>
+          <button id="csvBtn" class="secondary" disabled>CSV</button>
+          <button id="tsvBtn" class="secondary" disabled>TSV</button>
+          <button id="excelBtn" class="secondary" disabled>Excel-compatible CSV</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table id="resultsTable"><thead></thead><tbody></tbody></table>
+      </div>
+    </section>
+  </main>
+
+  <footer>Static GitHub Pages application · calculations run locally in your browser · no peptide sequences are submitted to a remote analysis service.</footer>
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>
